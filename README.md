@@ -7,12 +7,12 @@ A MQTT module for Nest.js. Compatible with emqtt.
 ## Installation
 
 ```bash
-$ npm install nest-mqtt mqtt --save
+$ npm install @fetaoily/nest-mqtt mqtt --save
 ```
 
 or
 ```bash
-$ yarn add nest-mqtt mqtt
+$ yarn add @fetaoily/nest-mqtt mqtt
 ```
 
 ## Usage
