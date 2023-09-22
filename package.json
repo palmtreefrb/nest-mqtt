@@ -1,13 +1,13 @@
 {
-  "name": "nest-mqtt",
-  "version": "0.2.0",
+  "name": "@fetaoily/nest-mqtt",
+  "version": "1.0.0",
   "description": "A MQTT module for Nest.js",
-  "author": "microud",
+  "author": "microud,fetaoily",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
-    "url": "https://github.com/microud/nest-mqtt"
+    "url": "https://github.com/fetaoily/nest-mqtt"
   },
   "keywords": [
     "nest-mqtt",
@@ -24,7 +24,8 @@
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json -c tslint.json"
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "publish": "npm publish --access=public"
   },
   "peerDependencies": {
     "@nestjs/common": "^6.10.11 || ^7.0.0 || ^8.0.0 || ^10.0.0",
