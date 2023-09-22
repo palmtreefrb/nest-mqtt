@@ -1,6 +1,7 @@
 import { IClientOptions, Packet } from 'mqtt';
 import { LoggerService, Type } from '@nestjs/common';
 import { ModuleMetadata } from '@nestjs/common/interfaces';
+import { IClientSubscribeOptions, IClientSubscribeProperties } from 'mqtt/src/lib/client';
 
 export type MqttMessageTransformer = (payload: Buffer) => any;
 
@@ -10,6 +11,7 @@ export interface MqttSubscribeOptions {
   topic: string | string[];
   queue?: boolean;
   share?: string;
+  rawOpts?: IClientSubscribeOptions | IClientSubscribeProperties;
   transform?: 'json' | 'text' | MqttMessageTransformer;
 }
 

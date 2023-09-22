@@ -2,19 +2,16 @@ import {Inject, Injectable, Logger, OnModuleInit} from '@nestjs/common';
 import {DiscoveryService, MetadataScanner, Reflector} from '@nestjs/core';
 import {InstanceWrapper} from '@nestjs/core/injector/instance-wrapper';
 import {
-  MQTT_CLIENT_INSTANCE, MQTT_LOGGER_PROVIDER, MQTT_OPTION_PROVIDER,
+  MQTT_CLIENT_INSTANCE,
+  MQTT_LOGGER_PROVIDER,
+  MQTT_OPTION_PROVIDER,
   MQTT_SUBSCRIBE_OPTIONS,
   MQTT_SUBSCRIBER_PARAMS,
 } from './mqtt.constants';
-import {Client, MqttClient} from 'mqtt';
+import {MqttClient} from 'mqtt';
 import {Packet} from 'mqtt-packet';
 import {getTransform} from './mqtt.transform';
-import {
-  MqttModuleOptions,
-  MqttSubscribeOptions,
-  MqttSubscriber,
-  MqttSubscriberParameter,
-} from './mqtt.interface';
+import {MqttModuleOptions, MqttSubscribeOptions, MqttSubscriber, MqttSubscriberParameter} from './mqtt.interface';
 
 @Injectable()
 export class MqttExplorer implements OnModuleInit {
@@ -61,15 +58,15 @@ export class MqttExplorer implements OnModuleInit {
   }
 
   subscribe(options: MqttSubscribeOptions, parameters: MqttSubscriberParameter[], handle, provider) {
-    this.client.subscribe(this.preprocess(options), err => {
+    const rawOpts = options.rawOpts;
+    this.client.subscribe(this.preprocess(options), rawOpts, err => {
       if (!err) {
         // put it into this.subscribers;
         (Array.isArray(options.topic) ? options.topic : [options.topic])
           .forEach(topic => {
             this.subscribers.push({
               topic,
-              route: topic.replace('$queue/', '')
-                .replace(/^\$share\/([A-Za-z0-9]+)\//, ''),
+              route: topic.replace('$queue/', '').replace(/^\$share\/([A-Za-z0-9]+)\//, ''),
               regexp: MqttExplorer.topicToRegexp(topic),
               provider,
               handle,
