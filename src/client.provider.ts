@@ -18,7 +18,7 @@ export function createClientProvider(): Provider {
       });
 
       client.on('error', (error) => {
-        logger.log(`MQTT error: ${error.message}`);
+        logger.error(`MQTT error: ${error.message}`);
       });
 
       client.on('reconnect', () => {
