@@ -1,20 +1,11 @@
-import {
-  DynamicModule,
-  Global,
-  Module,
-} from '@nestjs/common';
+import { DynamicModule, Global, Module } from '@nestjs/common';
 import { MqttService } from './mqtt.service';
 import { createClientProvider } from './client.provider';
 import { MqttExplorer } from './mqtt.explorer';
 import { DiscoveryModule } from '@nestjs/core';
 import { createLoggerProvider, createOptionProviders } from './options.provider';
-import {
-  MqttModuleAsyncOptions,
-  MqttModuleOptions,
-} from './mqtt.interface';
-import {
-  MQTT_OPTION_PROVIDER,
-} from './mqtt.constants';
+import { MqttModuleAsyncOptions, MqttModuleOptions } from './mqtt.interface';
+import { MQTT_OPTION_PROVIDER } from './mqtt.constants';
 
 @Global()
 @Module({
@@ -22,7 +13,6 @@ import {
   exports: [MqttService],
 })
 export class MqttModule {
-
   public static forRootAsync(options: MqttModuleAsyncOptions): DynamicModule {
     return {
       module: MqttModule,

@@ -1,12 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { MQTT_CLIENT_INSTANCE } from './mqtt.constants';
-import { Client, Packet, IClientPublishOptions, IClientSubscribeOptions, ISubscriptionGrant } from 'mqtt';
+import { IClientPublishOptions, IClientSubscribeOptions, ISubscriptionGrant, MqttClient, Packet } from 'mqtt';
 
 @Injectable()
 export class MqttService {
-  constructor(
-    @Inject(MQTT_CLIENT_INSTANCE) private readonly client: Client,
-  ) {}
+  constructor(@Inject(MQTT_CLIENT_INSTANCE) private readonly client: MqttClient) {}
 
   subscribe(topic: string | string[], opts?: IClientSubscribeOptions): Promise<ISubscriptionGrant[]> {
     return new Promise((resolve, reject) => {
@@ -20,7 +18,7 @@ export class MqttService {
     });
   }
 
-  unsubscribe(topic: string, opts?: Record<string, any>): Promise<Packet> {
+  unsubscribe(topic: string, opts?: IClientSubscribeOptions): Promise<Packet> {
     return new Promise<Packet>((resolve, reject) => {
       this.client.unsubscribe(topic, opts || null, (error, packet) => {
         if (error) {

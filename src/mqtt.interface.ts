@@ -60,13 +60,10 @@ export interface MqttOptionsFactory {
   createMqttConnectOptions(): Promise<MqttModuleOptions> | MqttModuleOptions;
 }
 
-export interface MqttModuleAsyncOptions
-  extends Pick<ModuleMetadata, 'imports'> {
+export interface MqttModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
   inject?: any[];
   useExisting?: Type<MqttOptionsFactory>;
   useClass?: Type<MqttOptionsFactory>;
-  useFactory?: (
-    ...args: any[]
-  ) => Promise<MqttModuleOptions> | MqttModuleOptions;
+  useFactory?: (...args: any[]) => Promise<MqttModuleOptions> | MqttModuleOptions;
   logger?: MqttLoggerOptions;
 }

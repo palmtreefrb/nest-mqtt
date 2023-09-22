@@ -2,9 +2,7 @@ import { MqttModuleAsyncOptions, MqttModuleOptions, MqttOptionsFactory } from '.
 import { Logger, Provider } from '@nestjs/common';
 import { MQTT_CLIENT_INSTANCE, MQTT_LOGGER_PROVIDER, MQTT_OPTION_PROVIDER } from './mqtt.constants';
 
-export function createOptionsProvider(
-  options: MqttModuleAsyncOptions,
-): Provider {
+export function createOptionsProvider(options: MqttModuleAsyncOptions): Provider {
   if (options.useFactory) {
     return {
       provide: MQTT_OPTION_PROVIDER,
@@ -16,24 +14,20 @@ export function createOptionsProvider(
   if (options.useExisting) {
     return {
       provide: MQTT_OPTION_PROVIDER,
-      useFactory: async (optionsFactory: MqttOptionsFactory) =>
-        await optionsFactory.createMqttConnectOptions(),
+      useFactory: async (optionsFactory: MqttOptionsFactory) => await optionsFactory.createMqttConnectOptions(),
       inject: [options.useExisting || options.useClass],
     };
   }
 }
 
-export function createOptionProviders(
-  options: MqttModuleAsyncOptions,
-): Provider[] {
+export function createOptionProviders(options: MqttModuleAsyncOptions): Provider[] {
   if (options.useExisting || options.useFactory) {
     return [createOptionsProvider(options)];
   }
   return [
     {
       provide: MQTT_CLIENT_INSTANCE,
-      useFactory: async (optionFactory: MqttOptionsFactory) =>
-        await optionFactory.createMqttConnectOptions(),
+      useFactory: async (optionFactory: MqttOptionsFactory) => await optionFactory.createMqttConnectOptions(),
       inject: [options.useClass],
     },
     {

@@ -11,7 +11,6 @@ export function createClientProvider(): Provider {
 
       client.on('connect', () => {
         logger.log('MQTT connected');
-        // console.log(packet);
       });
 
       client.on('disconnect', packet => {
@@ -19,14 +18,15 @@ export function createClientProvider(): Provider {
       });
 
       client.on('error', error => {
+        this.logger.log(`MQTT error: ${error.message}`);
       });
 
       client.on('reconnect', () => {
         logger.log('MQTT reconnecting');
       });
 
-      client.on('close', error => {
-        logger.log('MQTT closed');
+      client.on('close', () => {
+        logger.log(`MQTT closed`);
       });
 
       client.on('offline', () => {
