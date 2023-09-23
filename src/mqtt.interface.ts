@@ -63,6 +63,7 @@ export interface MqttOptionsFactory {
 }
 
 export interface MqttModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
+  global?: boolean;
   inject?: any[];
   useExisting?: Type<MqttOptionsFactory>;
   useClass?: Type<MqttOptionsFactory>;

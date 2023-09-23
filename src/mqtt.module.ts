@@ -7,7 +7,6 @@ import { createLoggerProvider, createOptionProviders } from './options.provider'
 import { MqttModuleAsyncOptions, MqttModuleOptions } from './mqtt.interface';
 import { MQTT_OPTION_PROVIDER } from './mqtt.constants';
 
-@Global()
 @Module({
   imports: [DiscoveryModule],
   exports: [MqttService],
@@ -16,6 +15,7 @@ export class MqttModule {
   public static forRootAsync(options: MqttModuleAsyncOptions): DynamicModule {
     return {
       module: MqttModule,
+      global: options.global,
       providers: [
         ...createOptionProviders(options),
         createLoggerProvider(options),
