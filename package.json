@@ -1,5 +1,5 @@
 {
-  "name": "@fetaoily/nest-mqtt",
+  "name": "nest-mqtt",
   "version": "1.0.5",
   "description": "A MQTT module for Nest.js",
   "author": "microud,fetaoily",
@@ -7,7 +7,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
-    "url": "https://github.com/fetaoily/nest-mqtt"
+    "type": "git",
+    "url": "git+https://github.com/palmtreefrb/nest-mqtt.git"
   },
   "keywords": [
     "nest-mqtt",
